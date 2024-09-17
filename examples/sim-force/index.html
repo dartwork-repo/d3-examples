@@ -12,9 +12,9 @@ console.log(c1);
 
 let g1Height = 500;
 let g2Height = g1Height;
-let g1Width = 550;
-let g2Width = 300;
-let margin = {top: 10, right: 30, bottom: 20, left: 30};
+let g1Width = 450;
+let g2Width = 400;
+let margin = {top: 10, right: 30, bottom: 50, left: 30};
 let pad = 40;
 let hPad = 20;
 let maxTs = 5
@@ -81,6 +81,7 @@ function drawTsList() {
         .data(selectedIndices)
         .join('g')
         .attr('class', 'sub')
+        .attr('id', (d, i) => `sub-${i}`)
         .attr('transform', (d, i) => `translate(0, ${i * (tsHeight + hPad)})`)
 
     // Pink background.
@@ -149,6 +150,18 @@ function drawTsList() {
         .attr('stroke', (d, i) => colors[i])
         .attr('stroke-width', 1)
         .attr('clip-path', (d, i) => `url(#clip-${i})`)
+
+    d3.select(`#x-axis-label`).remove();
+    d3.select(`#sub-${selectedIndices.length - 1}`)
+        .append('text')
+        .attr('id', 'x-axis-label')
+        .attr('text-anchor', 'middle')
+        .attr('x', g2Width / 2)
+        .attr('y', tsHeight + 32)
+        .attr('fill', 'gray')
+        .attr('font-size', 12)
+        .text('Time [hour]')
+    ;
 
     //  틱 두께 조정.
     sub.selectAll('.x-axis .tick line')
@@ -384,7 +397,8 @@ function draw(targetBid, data) {
         // .attr('stroke', 'white')
         .attr('fill', 'black')
         // .attr('stroke-width', 0.3)/
-        .style("pointer-events", "none");
+        .style("pointer-events", "none")
+    ;
 
     link
         .on("mouseover", (event, d) => {
