@@ -107,6 +107,7 @@ function drawTsList() {
 
     let xaxis = d3.axisBottom(xscale)
         .tickSize(2.5)
+        .tickFormat(d3.format('d'))
     ;
     let yaxis = d3.axisLeft(yscale)
         .tickValues([-2, -1, 0, 1, 2])
