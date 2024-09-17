@@ -137,6 +137,19 @@ function drawTsList() {
         .attr('stroke', (d, i) => colors[i])
         .attr('stroke-width', 1)
 
+    //  틱 두께 조정.
+    sub.selectAll('.x-axis .tick line')
+        .attr('stroke-width', 0.5)
+
+    sub.selectAll('.x-axis .domain')
+        .attr('stroke-width', 0.5)
+
+    sub.selectAll('.y-axis .tick line')
+        .attr('stroke-width', 0.5)
+
+    sub.selectAll('.y-axis .domain')
+        .attr('stroke-width', 0.5)
+
     // sub.selectAll('.ts')
     //     // .data([1])
     //     // .join('g')
