@@ -133,6 +133,13 @@ function drawTsList() {
         .x((d, i) => xscale(i))
         .y(d => yscale(d))
 
+    sub.selectAll('defs').remove();
+    sub.append("defs").append("clipPath")
+        .attr("id", (d, i) => `clip-${i}`)
+        .append("rect")
+        .attr("width", g2Width)
+        .attr("height", tsHeight);
+
     sub.selectAll('path.line').remove();
     sub.append('path')
         .attr('class', 'line')
@@ -141,6 +148,7 @@ function drawTsList() {
         .attr('fill', 'none')
         .attr('stroke', (d, i) => colors[i])
         .attr('stroke-width', 1)
+        .attr('clip-path', (d, i) => `url(#clip-${i})`)
 
     //  틱 두께 조정.
     sub.selectAll('.x-axis .tick line')
