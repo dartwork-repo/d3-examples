@@ -105,9 +105,12 @@ function drawTsList() {
         .range([tsHeight, 0])
     ;
 
-    let xaxis = d3.axisBottom(xscale);
+    let xaxis = d3.axisBottom(xscale)
+        .tickSize(2.5)
+    ;
     let yaxis = d3.axisLeft(yscale)
         .tickValues([-2, -1, 0, 1, 2])
+        .tickSize(2.5)
     ;
 
     
