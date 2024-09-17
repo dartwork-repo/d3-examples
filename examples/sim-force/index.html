@@ -253,13 +253,14 @@ function draw(targetBid, data) {
     const node = g1
         .append("g")
         .attr('id', 'nodes')
-        .attr("stroke", "gray")
-        .attr("stroke-width", 1.5)
+        // .attr("stroke", "gray")
+        // .attr("stroke-width", 1.5)
         .selectAll()
         .data(nodes)
         .join("circle")
         .attr('class', 'node-circle')
-        .attr("r", 7)
+        .attr("r", 7.5)
+        .attr('fill', 'gray')
         .on("mouseover", (event, d) => {
             // Add tooltip.
             tooltip
@@ -314,7 +315,7 @@ function draw(targetBid, data) {
                         console.log(d.index, d.id, idx, color);
                     }
                     else {
-                        color = 'black';
+                        color = 'gray';
                     }
                     return color;
                     // return selectedIndices.includes(i) ? color : 'black';
