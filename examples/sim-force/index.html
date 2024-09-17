@@ -47,9 +47,9 @@ let svg = d3.select('body')
 
 let g1 = svg.append('g')
     .attr('id', 'g1')
-    .attr('transform', `translate(${margin.left}, ${margin.top})`)
     .attr('width', g1Width)
     .attr('height', g1Height)
+    .attr('transform', `translate(${margin.left}, ${margin.top}) scale(1.1) translate(${-margin.left}, ${-margin.top})`)
 ;
 
 // g1.append('rect')
@@ -212,7 +212,7 @@ function drawTsList() {
 
 
 const simulation = d3.forceSimulation()
-    .force('charge', d3.forceManyBody().strength(-50))
+    .force('charge', d3.forceManyBody().strength(-45))
     .force('collide', d3.forceCollide().radius(10).strength(0.5))
 ;
 
@@ -305,7 +305,7 @@ function draw(targetBid, data) {
             // redraw(d.id, data);
             // return;
             // // }
-
+            
 
             if (d.index === targetIndex)
                 return;
