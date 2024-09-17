@@ -101,7 +101,7 @@ function drawTsList() {
     ;
 
     let yscale = d3.scaleLinear()
-        .domain([-2, 2.5])
+        .domain([-1.5, 1.5])
         .range([tsHeight, 0])
     ;
 
@@ -110,7 +110,7 @@ function drawTsList() {
         .tickFormat(d3.format('d'))
     ;
     let yaxis = d3.axisLeft(yscale)
-        .tickValues([-2, -1, 0, 1, 2])
+        .tickValues([-1, 0, 1])
         .tickSize(2.5)
         .tickSizeOuter(0)
     ;
@@ -145,15 +145,25 @@ function drawTsList() {
     //  틱 두께 조정.
     sub.selectAll('.x-axis .tick line')
         .attr('stroke-width', 0.5)
+        .attr('stroke', 'gray')
 
     sub.selectAll('.x-axis .domain')
         .attr('stroke-width', 0.5)
+        .attr('stroke', 'gray')
 
     sub.selectAll('.y-axis .tick line')
         .attr('stroke-width', 0.5)
+        .attr('stroke', 'gray')
 
     sub.selectAll('.y-axis .domain')
         .attr('stroke-width', 0.5)
+        .attr('stroke', 'gray')
+
+    sub.selectAll('.x-axis .tick text')
+        .attr('color', 'gray')
+
+    sub.selectAll('.y-axis .tick text')
+        .attr('color', 'gray')
 
     // sub.selectAll('.ts')
     //     // .data([1])
