@@ -347,9 +347,15 @@ function draw(targetBid, data) {
         .data(nodes)
         .join("circle")
         .attr('class', 'node-circle')
+        .attr('id', (d, i) => `node-${d.bid}`)
         .attr("r", 7.5)
         .attr('fill', grayColor)
         .on("mouseover", (event, d) => {
+            console.log(event.target.id.split('-')[1] === targetBid);
+
+            if (event.target.id.split('-')[1] === targetBid)
+                return;
+
             let dist = 1000*d.similarity > 10 ? (1000*d.similarity).toFixed(1) : (1000*d.similarity).toFixed(2);
             // Add tooltip.
             tooltip
