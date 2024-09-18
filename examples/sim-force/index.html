@@ -288,9 +288,7 @@ console.log(simulation);
 
 function createNodesAndLinks(data, targetBid) {
     // Copy data.
-    const nodes = data.map(d => ({
-        ...d, id: +d.bid
-    }));
+    const nodes = data.map(d => ({...d, id: +d.bid}));
 
     // Find bid == targetBid index.
     const targetIndex = nodes.findIndex(d => String(d.bid) === targetBid);
@@ -610,6 +608,7 @@ function redraw(targetBid, data) {
     d3.selectAll('#nodes').remove();
     d3.selectAll('#links').remove();
     d3.selectAll('#texts').remove();
+    
     tsAxes.selectAll('*').remove();
     draw(targetBid, data);
 }
@@ -620,7 +619,7 @@ Promise.all([
 ]).then(([simData, tsData]) => {
     console.log('Data loaded');
 
-    let targetBid = "0";
+    let targetBid = "48";
     data = preprocessData(targetBid, simData, tsData);
 
     draw(targetBid, data);
