@@ -15,7 +15,7 @@ let g2Height = g1Height;
 let g1Width = 450;
 let g2Width = 400;
 let margin = {top: 10, right: 30, bottom: 50, left: 30};
-let pad = 40;
+let pad = 60;
 let hPad = 20;
 let maxTs = 5
 let tsHeight = g2Height - (maxTs - 1) * hPad;  
@@ -162,6 +162,46 @@ function drawTsList() {
         .attr('font-size', 12)
         .text('Time [hour]')
     ;
+
+    let targetAxes = Math.floor(selectedIndices.length / 2);
+    let isOdd = selectedIndices.length % 2;
+
+    console.log(isOdd);
+
+    d3.select(`#y-axis-label`).remove();
+    d3.select(`#sub-${targetAxes}`)
+        .append('text')
+        .attr('id', 'y-axis-label')
+        .attr('text-anchor', 'middle')
+        // .attr('x', () => {
+        //     if (isOdd) {
+        //         console.log('Odd', isOdd);
+        //         return -tsHeight / 2;
+        //     } else {
+        //         console.log('Even', isOdd);
+        //         return tsHeight / 2;
+        //     }    
+        // })
+        .attr('y', -50)
+        .attr('fill', 'gray')
+        .attr('font-size', 12)
+        .attr('transform', 'rotate(-90)')
+        .selectAll("tspan") // tspan 요소 선택
+        .data('Normalized\nelectricity usage'.split('\n')) // 줄바꿈으로 나누기
+        .enter()
+        .append("tspan") // tspan 요소 추가
+        // .attr("x", -tsHeight / 2) // 동일한 x 위치 유지
+        .attr('x', () => {
+            if (isOdd) {
+                console.log('Odd', isOdd);
+                return -tsHeight / 2;
+            } else {
+                console.log('Even', isOdd);
+                return hPad;
+            }    
+        })
+        .attr("dy", (d, i) => i === 0 ? 0 : "1.2em") // 첫 줄은 기본 위치, 나머지 줄은 아래로 이동
+        .text(d => d); // 각 줄의 텍스트 설정
 
     //  틱 두께 조정.
     sub.selectAll('.x-axis .tick line')
