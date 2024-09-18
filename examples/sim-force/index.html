@@ -93,6 +93,10 @@ function drawTsList() {
         .join('g')
         .attr('class', 'sub')
         .attr('id', (d, i) => `sub-${i}`)
+    ;
+
+    sub
+        // .transition()
         .attr('transform', (d, i) => `translate(0, ${i * m + (2.5 - 0.5 * n) * m})`)
 
     // Pink background.
