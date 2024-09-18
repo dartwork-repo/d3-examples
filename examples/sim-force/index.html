@@ -200,7 +200,7 @@ function drawTsList() {
                 return -tsHeight / 2;
             } else {
                 console.log('Even', isOdd);
-                return hPad;
+                return hPad / 2;
             }    
         })
         .attr("dy", (d, i) => i === 0 ? 0 : "1.2em") // 첫 줄은 기본 위치, 나머지 줄은 아래로 이동
