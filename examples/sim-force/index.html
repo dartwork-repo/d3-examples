@@ -419,7 +419,7 @@ function draw(targetBid, data) {
                     return color;
                     // return selectedIndices.includes(i) ? color : 'black';
                 })
-                .attr('r', (d, i) => selectedIndices.includes(i) ? 10 : 7)
+                .attr('r', (d, i) => selectedIndices.includes(i) ? 10 : 7.5)
             ;
 
             d3.selectAll('.node-text')
