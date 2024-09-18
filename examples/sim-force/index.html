@@ -623,7 +623,7 @@ Promise.all([
 ]).then(([simData, tsData]) => {
     console.log('Data loaded');
 
-    let targetBid = "48";
+    let targetBid = "0";
     data = preprocessData(targetBid, simData, tsData);
 
     draw(targetBid, data);
