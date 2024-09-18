@@ -76,13 +76,16 @@ function drawTs(idx) {
 }
 
 function drawTsList() {
+    let n = selectedIndices.length;
+    let m = tsHeight + hPad;
+
     let sub = tsAxes
         .selectAll('g.sub')
         .data(selectedIndices)
         .join('g')
         .attr('class', 'sub')
         .attr('id', (d, i) => `sub-${i}`)
-        .attr('transform', (d, i) => `translate(0, ${i * (tsHeight + hPad)})`)
+        .attr('transform', (d, i) => `translate(0, ${i * m + (2.5 - 0.5 * n) * m})`)
 
     // Pink background.
     // sub
