@@ -27,6 +27,8 @@ let height = g1Height + margin.top + margin.bottom;
 
 let selectedIndices = [];
 
+let grayColor = '#6b7280';
+
 colors = [
     "#EF4444", // 빨강
     "#22C55E", // 초록
@@ -161,7 +163,7 @@ function drawTsList() {
         .attr('text-anchor', 'middle')
         .attr('x', g2Width / 2)
         .attr('y', tsHeight + 32)
-        .attr('fill', 'gray')
+        .attr('fill', grayColor)
         .attr('font-size', 12)
         .text('Time [hour]')
     ;
@@ -177,7 +179,7 @@ function drawTsList() {
         .attr('id', 'y-axis-label')
         .attr('text-anchor', 'middle')
         .attr('y', -50)
-        .attr('fill', 'gray')
+        .attr('fill', grayColor)
         .attr('font-size', 12)
         .attr('transform', 'rotate(-90)')
         .text('Normalized electricity usage') // 줄바꿈으로 나누기
@@ -212,25 +214,25 @@ function drawTsList() {
     //  틱 두께 조정.
     sub.selectAll('.x-axis .tick line')
         .attr('stroke-width', 0.5)
-        .attr('stroke', 'gray')
+        .attr('stroke', grayColor)
 
     sub.selectAll('.x-axis .domain')
         .attr('stroke-width', 0.5)
-        .attr('stroke', 'gray')
+        .attr('stroke', grayColor)
 
     sub.selectAll('.y-axis .tick line')
         .attr('stroke-width', 0.5)
-        .attr('stroke', 'gray')
+        .attr('stroke', grayColor)
 
     sub.selectAll('.y-axis .domain')
         .attr('stroke-width', 0.5)
-        .attr('stroke', 'gray')
+        .attr('stroke', grayColor)
 
     sub.selectAll('.x-axis .tick text')
-        .attr('color', 'gray')
+        .attr('color', grayColor)
 
     sub.selectAll('.y-axis .tick text')
-        .attr('color', 'gray')
+        .attr('color', grayColor)
 
     // sub.selectAll('.ts')
     //     // .data([1])
@@ -339,7 +341,7 @@ function draw(targetBid, data) {
         .join("circle")
         .attr('class', 'node-circle')
         .attr("r", 7.5)
-        .attr('fill', 'gray')
+        .attr('fill', grayColor)
         .on("mouseover", (event, d) => {
             // Add tooltip.
             tooltip
@@ -394,7 +396,7 @@ function draw(targetBid, data) {
                         console.log(d.index, d.id, idx, color);
                     }
                     else {
-                        color = 'gray';
+                        color = grayColor;
                     }
                     return color;
                     // return selectedIndices.includes(i) ? color : 'black';
@@ -402,6 +404,11 @@ function draw(targetBid, data) {
                 .attr('r', (d, i) => selectedIndices.includes(i) ? 10 : 7)
             ;
 
+            d3.selectAll('.node-text')
+                .transition()
+                .attr('font-weight', (d, i) => selectedIndices.includes(i) ? 'bold' : 'normal')
+                .attr('font-size', (d, i) => selectedIndices.includes(i) ? 9 : 8)
+            ;
             // d3.selectAll('.node-circle')
             //     .filter((d, i) => !selectedIndices.includes(i))
             //     .attr('fill', 'black')
@@ -421,6 +428,7 @@ function draw(targetBid, data) {
         .data(nodes)
         .join("text")
         .text(d => d.bid)
+        .attr('class', 'node-text')
         .attr("font-size", 8)
         .attr("x", d => d.x)
         .attr("y", d => d.y)
