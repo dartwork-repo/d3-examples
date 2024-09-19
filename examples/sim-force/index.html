@@ -10,6 +10,9 @@
     </style>
 </head>
 <body>
+<svg></svg>
+<br/>
+<button id="download">그래프 다운로드</button>
 <script>
 
 let colors = d3.scaleOrdinal(d3.schemeCategory10);
@@ -43,8 +46,8 @@ colors = [
     "#A855F7", // 보라
 ];
 
-let svg = d3.select('body')
-    .append('svg')
+let svg = d3.select('body svg')
+    // .append('svg')
     .attr('width', width)
     .attr('height', height);
 
@@ -632,6 +635,17 @@ Promise.all([
 
     // console.log(simData);
     // console.log(tsData);
+    document.getElementById("download").addEventListener("click", function() {
+            const svgData = new XMLSerializer().serializeToString(svg.node());
+            const svgBlob = new Blob([svgData], { type: "image/svg+xml;charset=utf-8" });
+            const url = URL.createObjectURL(svgBlob);
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = "graph.svg";
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+    });
 });
 
 </script>
